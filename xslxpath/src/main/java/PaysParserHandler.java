@@ -137,14 +137,13 @@ public class PaysParserHandler {
             return;
         }
 
-        switch (currentElement()){
-            case "capital" :
-                Pays pays = (Pays) this.objectStack.peek();
-                pays.setCapitale(value);
-                break;
-            case "flag" :
-                Pays pays = (Pays) this.objectStack.peek():
-                pays.setDrapeau(value);
+        String s = currentElement();
+        if ("capital".equals(s)) {
+            Pays pays = (Pays) this.objectStack.peek();
+            pays.setCapitale(value);
+        } else if ("flag".equals(s)) {
+            Pays pays = (Pays) this.objectStack.peek();
+            pays.setDrapeau(value);
         }
     }
 
