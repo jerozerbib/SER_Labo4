@@ -138,12 +138,32 @@ public class PaysParserHandler {
         }
 
         String s = currentElement();
-        if ("capital".equals(s)) {
-            Pays pays = (Pays) this.objectStack.peek();
-            pays.setCapitale(value);
-        } else if ("flag".equals(s)) {
-            Pays pays = (Pays) this.objectStack.peek();
-            pays.setDrapeau(value);
+        switch (s) {
+            case "capital": {
+                Pays pays = (Pays) this.objectStack.peek();
+                pays.setCapitale(value);
+                break;
+            }
+            case "flag": {
+                Pays pays = (Pays) this.objectStack.peek();
+                pays.setDrapeau(value);
+                break;
+            }
+            case "region": {
+                Pays pays = (Pays) this.objectStack.peek();
+                pays.setContinent(value);
+                break;
+            }
+            case "population": {
+                Pays pays = (Pays) this.objectStack.peek();
+                pays.setPopulation(Integer.parseInt(value));
+                break;
+            }
+            case "area": {
+                Pays pays = (Pays) this.objectStack.peek();
+                pays.setSuperficie(Double.parseDouble(value));
+                break;
+            }
         }
     }
 
