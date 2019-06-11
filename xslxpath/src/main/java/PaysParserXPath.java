@@ -1,82 +1,16 @@
-import org.w3c.dom.Document;
-import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
-
-import javax.swing.*;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.xpath.*;
-import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.io.File;
-import java.io.IOException;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathExpression;
+import javax.xml.xpath.XPathFactory;
 
-public class InterfaceRecherchePays extends JFrame {
+import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
 
-    private JPanel panelRecherche = new JPanel(new FlowLayout());
+public class PaysParserXPath {
+    public static void main(String[] args) throws Exception {
 
-    private JComboBox<String> continents = new JComboBox<>();
-    private JComboBox<String> langages = new JComboBox<>();
-    private JButton createXSL = new JButton("Générer XSL");
-    private JTextField superficieMin = new JTextField(5);
-    private JTextField superficieMax = new JTextField(5);
-
-    public InterfaceRecherchePays(File xmlFile) {
-
-        createXSL.addMouseListener(new MouseAdapter() {
-
-            @Override
-            public void mouseClicked(MouseEvent e) {
-
-                super.mouseClicked(e);
-
-                // Création des fichiers XSL selon ce qui est demandé
-
-                /** A compléter... **/
-
-            }
-
-        });
-
-        /**
-         * A compléter : Remplissage des listes de recherche (avec les continents et les langues parlées dans l'ordre alphabétique)
-         */
-
-        setLayout(new BorderLayout());
-
-        panelRecherche.add(new JLabel("Choix d'un continent"));
-        panelRecherche.add(continents);
-
-        panelRecherche.add(new JLabel("Choix d'une langue"));
-        panelRecherche.add(langages);
-
-        panelRecherche.add(new JLabel("Superficie minimume"));
-        panelRecherche.add(superficieMin);
-
-        panelRecherche.add(new JLabel("Superficie maximum"));
-        panelRecherche.add(superficieMax);
-
-        panelRecherche.add(createXSL);
-
-        add(panelRecherche, BorderLayout.CENTER);
-
-        pack();
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setVisible(true);
-        setTitle("Interface de recherche de pays");
-
-
-    }
-
-    public static void main(String ... args) {
-
-        new InterfaceRecherchePays(new File("countries.xml"));
-
-    }
-
-    private void generateDrawers() throws ParserConfigurationException, IOException, SAXException, XPathExpressionException {
         // Construction du DOM
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         factory.setNamespaceAware(true); // never forget this!
@@ -128,5 +62,4 @@ public class InterfaceRecherchePays extends JFrame {
         result = expr.evaluate(doc, XPathConstants.NODESET);
         nodes = (NodeList) result;
     }
-
 }
